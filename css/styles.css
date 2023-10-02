@@ -28,19 +28,6 @@ nav a {
   }
 }
 
-.jumbotron {
-  height: 50vh;
-  padding: 5em inherit;
-  margin-bottom: 0;
-  background-color: #53C0FB;
-  background: url('../img/cover_back.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: black;
-  font-weight: bold;
-}
-
 @media (min-width: 768px) {
   .jumbotron {
     padding-top: 6rem;
@@ -243,19 +230,22 @@ body {
   background-color:var(--color-fondo);
   color:var(--color-fuente) 
 }
+
+footer {
+  background-color: #212529;
+}
+
 .userIcon{
   width: 25px;
   height: 25px;
   padding: 2px;
 }
 
-
-.userIcon{
+.userIcon {
   width: 25px;
   height: 25px;
   padding: 2px;
 }
-
 
 .list-group-item,
 .carousel {
