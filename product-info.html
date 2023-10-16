@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>eMercado - Todo lo que busques está aquí</title>
-  <link rel="shortcut icon" href="icons/descarga.png">
+  <link rel="shortcut icon" href="icons\singleIcon.png">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -14,52 +14,59 @@
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav w-100 justify-content-between">
-          <li >
-            <a class="nav-item" href="index.html"><img class="logo" src="icons\logo(190x45px).svg"></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="categories.html">Categorías</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="sell.html">Vender</a>
-          </li>
-          <li class="nav-item" id="dropmenu">
-          </li>
-        </ul>
+    <div class="col-12">
+      <div class="row">
+        <div class="col-8 col-lg-2">
+          <a class="logoItem" href="index.html"><img class="logo" src="icons\logo(190x45px).svg"></a>
+        </div>
+        <div class="col-2 col-lg-10">
+          <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav w-100 justify-content-between align-items-center">
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html">Inicio</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="categories.html">Categorías</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="sell.html">Vender</a>
+                </li>
+                <li class="nav-item" id="dropmenu"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </nav>
+
   <main>
-    <div class="container card  ">
+    <div class="container card py-4">
         <div class="row card-body">
           <div class="col-12 col-md-6" id="prod-carrousel"></div>
-          <div class="col-12 col-md-6" id="prod-info"></div>
-          <div class="col-12 pt-5" id="comments-section"></div>
+          <div class="col-12 col-md-6 py-4" id="prod-info"></div>
+          <div class="col-12 pt-4" id="comments-section"></div>
           <div class="col-12" id="comments-section-new"></div>
-          <div class="col-12 col-md-4">
+          <div class="col-12 col-md-4 py-4 px-4">
             <h4 class="h4 mt-1">Comentar</h4>
             <h6 class="h6 mt-3 mb-3">Tu opinión:</h6>
             <textarea class="form-control" id="comment-product" rows="4"></textarea>
             <h6 class="h6 mt-3 mb-3">Tu puntuación:</h6>
-            <select name="simple" id="rate-star" class="form-select w-50">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
+            <div class="form-floating">
+              <input type="range" class="rating" id="stars" min="1" max="5" placeholder="1" value="1"
+                  oninput="this.style.setProperty('--value', this.value)">
+              <!--<label for="stars">Rating</label>-->
+          </div>
             <button class="btn btn-dark mt-2" id="btn-comment">Enviar</button>
           </div>
-          <div class="col-12 col-md-4" id="related-products"></div>
+          <div class="col-1"></div>
+          <div class="col-12 col-md-7 py-4 px-4" id="related-products"></div>
         </div>
-        
      </div>
   </main>
   <footer class="text-muted">

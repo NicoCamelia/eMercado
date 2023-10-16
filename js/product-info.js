@@ -4,7 +4,7 @@ let urlPRODUCTS = PRODUCTS_URL + prodCAT + EXT_TYPE; // Generando URL concatenan
 let urlPROD = PRODUCT_INFO_URL+ + prodID + EXT_TYPE; // Generando URL concatenando variables desde init.js y prodID desde localStorage
 let urlCOMENTS = PRODUCT_INFO_COMMENTS_URL + prodID + EXT_TYPE; // Generando Url concatenando variables para traer los comentarios independientemente por cada id.
 let currentProd; //Se declara la variable que almacena la información del producto mostrado actualmente en la página
-let relatedProducts; //Se declara la variable que almacena la información de los productos relacionados
+let relatedProducts; //Se declara la variable que almacena la ifnformación de los productos relacionados
 
 
 document.addEventListener("DOMContentLoaded", function (e) {
@@ -37,7 +37,7 @@ function getRelatedProducts() {
 }
 
 function showRelatedProducts(relatedProducts) {
-    let htmlRelatedProducts = '<h4>Productos Relacionados</h4><div class="row">';
+    let htmlRelatedProducts = '<h4 class="py-2">Productos Relacionados</h4><div class="row">';
 
     if (relatedProducts && relatedProducts.length > 0) {
         for (let i = 0; i < relatedProducts.length; i++) {
@@ -90,24 +90,57 @@ function redirectToProduct(productID) {
 
 function showProductInfo() {
     let htmlContentToAppend = "";
-
+  
     htmlContentToAppend += `
-            <div><h4>${currentProd.name}</h4></div>
-            <div class="input-group mb-3 align-items-center">
-              <div class="price-fontstyle">${currentProd.currency}&nbsp;${currentProd.cost}</div>
-              <span class="text-muted font-small pl-5">&nbsp;&nbsp;&nbsp;| +${currentProd.soldCount} vendidos</span>
-            </div>
-            <div class="fs-6 pt-1 pb-3">
-                <h6><strong>Descripción</strong></h5>${currentProd.description}
-            </div>
-            <div class="col-12">
-                <input type="button" value="Agregar Carrito" id="agregar-carrito" class="btn btn-outline-dark btn-sm">
-            </div>
-        `;
-         //fs-x es como un hx
-
+      <div><h4>${currentProd.name}</h4></div>
+      <div class="input-group mb-3 align-items-center">
+        <div class="price-fontstyle">${currentProd.currency}&nbsp;${currentProd.cost}</div>
+        <span class="text-muted font-small pl-5">&nbsp;&nbsp;&nbsp;| +${currentProd.soldCount} vendidos</span>
+      </div>
+      <div class="fs-6 pt-1 pb-3">
+        <h6><strong>Descripción</strong></h6>${currentProd.description}
+      </div>
+      <div class="col-12">
+        <input type="button" value="Agregar Carrito" id="agregar-carrito" class="btn btn-outline-dark btn-sm">
+      </div>
+    `;
+  
     document.getElementById("prod-info").innerHTML = htmlContentToAppend;
-};
+  
+    // Agrega un evento click al botón "Agregar Carrito"
+    const agregarCarritoButton = document.getElementById('agregar-carrito');
+    agregarCarritoButton.addEventListener('click', function () {
+      const productName = currentProd.name;
+      const productPrice = currentProd.cost;
+      const productImages = currentProd.images;
+  
+      const firstImage = productImages[0];
+  
+      const product = {
+        id: currentProd.id, 
+        name: productName,
+        count: 1, 
+        unitCost: productPrice,
+        currency: currentProd.currency, 
+        image: firstImage,
+      };
+      const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+  
+      console.log('Producto a agregar al carrito:', product);
+  
+      carrito.push(product);
+  
+      console.log('Carrito actual después de agregar el producto:', carrito);
+  
+      localStorage.setItem('carrito', JSON.stringify(carrito));
+  
+      console.log('Datos del carrito en localStorage:', localStorage.getItem('carrito'));
+  
+      // Redirige a la página del carrito
+      window.location.href = "cart.html";
+    });
+  }
+  
 
 function showImagesHtml() {
     let htmlImages = `
@@ -213,28 +246,16 @@ let htmlContentToAppend = '' // Construye el HTML para mostrar los comentarios
 let newUser = JSON.parse(localStorage.getItem('usuario') || sessionStorage.getItem('usuario'))
 const newDateTime = new Date().toISOString()
 const newDescription = document.getElementById('comment-product').value;
-let starRate = document.getElementById('rate-star').value;
+let valorEstrella = document.getElementById("stars").value
 
-//Repetimos el codigo de la funcion showComments() para mostrar las estrellas
-let starContainer = '<div class="stars-container">';
-let checkedStars = Math.floor(starRate);
-let emptyStars = 5 - checkedStars;
-
-    for (let i = 0; i < checkedStars; i++) {
-        starContainer += '<span class="fa fa-star checked"></span>';
-    }
-    
-    for (let i = 0; i < emptyStars; i++) {
-        starContainer += '<span class="fa fa-star"></span>';
-    }
-    
-    starContainer += '</div>';
      //Creamos el contenido del comentario dentro del documento HTML
     htmlContentToAppend += `
     <div class="card mb-3">
         <div class="card-body">
             <h6 class="card-title">${newUser.email}</h6>
-            ${starContainer}
+            <div class="d-flex flex-row">
+                            ${estrellas(valorEstrella)}
+                        </div>
             <small class="text-muted">${newDateTime}</small>
             <p class="card-text">${newDescription}</p>
         </div>
@@ -243,5 +264,17 @@ let emptyStars = 5 - checkedStars;
 
     document.getElementById('comments-section-new').innerHTML += htmlContentToAppend;
     document.getElementById('comment-product').value = ""
-    document.getElementById('rate-star').value = "0"
+    document.getElementById('stars').value = "1"
 });
+
+function estrellas(score) {
+    let estrella = ``
+    for (let i = 0; i < 5; i++) {
+        if (i < score) {
+            estrella += `<i class="fa fa-star checked"></i>`
+        } else {
+            estrella += `<i class="fa fa-star"></i>`
+        }
+    }
+    return estrella;
+};

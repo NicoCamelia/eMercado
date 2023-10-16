@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>eMercado - Todo lo que busques está aquí</title>
-  <link rel="shortcut icon" href="icons/descarga.png">
+  <link rel="shortcut icon" href="icons\singleIcon.png">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -14,72 +14,62 @@
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav w-100 justify-content-between">
-          <li >
-            <a class="nav-item" href="index.html"><img class="logo" src="icons\logo(190x45px).svg"></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="categories.html">Categorías</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="sell.html">Vender</a>
-          </li>
-          <li class="nav-item" id="dropmenu">
-          </li>
-        </ul>
+    <div class="col-12">
+      <div class="row">
+        <div class="col-8 col-lg-2">
+          <a class="logoItem" href="index.html"><img class="logo" src="icons\logo(190x45px).svg"></a>
+        </div>
+        <div class="col-2 col-lg-10">
+          <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav w-100 justify-content-between align-items-center">
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html">Inicio</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="categories.html">Categorías</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="sell.html">Vender</a>
+                </li>
+                <li class="nav-item" id="dropmenu"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </nav>
-  <main class="pb-5">
-    <div class="text-center p-4">
+  <main class="pb-4">
+    <div class="text-center p-2">
       <h2>Categorías</h2>
       <p class="lead">Verás aquí todas las categorías del sitio.</p>
     </div>
+
+
     <div class="container">
       <div class="row">
-        <div class="col text-end">
+        <div class="col-12 col-md-8 py-2">
+        <input class="form-control" type="search" placeholder="Buscar..." id="searchInput">
+        </div>
+        <div class="col-6 col-md-2 py-2">
+          <div class="btn-group" role="group">
+            <button class="btn btn-outline-dark" id="rangeFilterCount">Filtrar</button>
+            <button class="btn btn-outline-dark" id="clearRangeFilter">Limpiar</button>
+          </div>
+        </div>
+        <div class="col-6 col-md-2 py-2">
           <div class="btn-group btn-group-toggle mb-4" data-bs-toggle="buttons">
             <input type="radio" class="btn-check" name="options" id="sortAsc">
-            <label class="btn btn-light" for="sortAsc">A-Z</label>
+            <label class="btn btn-outline-dark" for="sortAsc">A-Z</label>
             <input type="radio" class="btn-check" name="options" id="sortDesc">
-            <label class="btn btn-light" for="sortDesc">Z-A</label>
+            <label class="btn btn-outline-dark" for="sortDesc">Z-A</label>
             <input type="radio" class="btn-check" name="options" id="sortByCount" checked>
-            <label class="btn btn-light" for="sortByCount"><i class="fas fa-sort-amount-down mr-1"></i></label>
-          </div>
-        </div>
-      </div>
-      <div class="row pt-2 pb-2">
-        <div class="col-12 col-md-5">
-          <div class="row">
-            <div class="col-8 col-md-8">
-              <input class="form-control" type="search" placeholder="Buscar..." id="searchInput">
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-md-7">
-          <div class="row">
-            <div class="col-2 col-md-1">
-              <p class="font-weight-normal text-end my-2">Cant.</p>
-            </div>
-            <div class="col-5 col-md-3">
-              <input class="form-control" min="0" type="number" placeholder="min." id="rangeFilterCountMin">
-            </div>
-            <div class="col-5 col-md-3">
-              <input class="form-control" min="0" type="number" placeholder="máx." id="rangeFilterCountMax">
-            </div>
-        
-            <div class="col-12 col-md-5">
-              <div class="btn-group" role="group">
-                <button class="btn btn-outline-dark" id="rangeFilterCount">Filtrar</button>
-                <button class="btn btn-outline-dark" id="clearRangeFilter">Limpiar</button>
-              </div>
-            </div>
+            <label class="btn btn-outline-dark" for="sortByCount"><i class="fas fa-sort-amount-down mr-1"></i></label>
           </div>
         </div>
       </div>
@@ -87,6 +77,9 @@
         <div class="list-group" id="cat-list-container">
         </div>
       </div>
+    </div>
+
+
     </div>
   </main>
   <footer class="text-muted">
