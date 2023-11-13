@@ -1,3 +1,4 @@
+// Variables para el cálculo de costos y símbolos de moneda
 let productCost = 0;
 let productCount = 0;
 let comissionPercentage = 0.13;
@@ -9,7 +10,7 @@ let PESO_SYMBOL = "UYU ";
 let PERCENTAGE_SYMBOL = '%';
 let MSG = "FUNCIONALIDAD NO IMPLEMENTADA";
 
-//Función que se utiliza para actualizar los costos de publicación
+// Función que actualiza los costos totales en la interfaz de usuario
 function updateTotalCosts(){
     let unitProductCostHTML = document.getElementById("productCostText");
     let comissionCostHTML = document.getElementById("comissionText");
@@ -24,10 +25,9 @@ function updateTotalCosts(){
     totalCostHTML.innerHTML = totalCostToShow;
 }
 
-//Función que se ejecuta una vez que se haya lanzado el evento de
-//que el documento se encuentra cargado, es decir, se encuentran todos los
-//elementos HTML presentes.
+// Evento que se ejecuta una vez que el DOM ha sido cargado completamente
 document.addEventListener("DOMContentLoaded", function(e){
+    // Event listeners para los cambios en los campos de entrada
     document.getElementById("productCountInput").addEventListener("change", function(){
         productCount = this.value;
         updateTotalCosts();
@@ -37,7 +37,8 @@ document.addEventListener("DOMContentLoaded", function(e){
         productCost = this.value;
         updateTotalCosts();
     });
-
+    
+    // Event listeners para los cambios en el tipo de comisión seleccionad
     document.getElementById("goldradio").addEventListener("change", function(){
         comissionPercentage = 0.13;
         updateTotalCosts();
@@ -52,7 +53,8 @@ document.addEventListener("DOMContentLoaded", function(e){
         comissionPercentage = 0.03;
         updateTotalCosts();
     });
-
+    
+    // Event listener para el cambio en la moneda seleccionada
     document.getElementById("productCurrency").addEventListener("change", function(){
         if (this.value == DOLLAR_CURRENCY)
         {
@@ -67,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function(e){
     });
 
 
-    //Configuraciones para el elemento que sube archivos
+    //Configuraciones para el elemento que sube archivos (dropzone)
     let dzoptions = {
         url:"/",
         autoQueue: false

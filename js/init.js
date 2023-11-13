@@ -48,15 +48,20 @@ function verificarAutenticacion() {
   }
 }
 
+
 document.addEventListener("DOMContentLoaded", function () {
+
   verificarAutenticacion();
+
+  // Se obtiene el nombre de usuario almacenado
   let userName = "";
   if (!localStorage.getItem("usuario")) {
     userName = JSON.parse(sessionStorage.getItem('usuario'));
   } else {
     userName = JSON.parse(localStorage.getItem('usuario'));
   }
-  // Se crea el contenido HTML del dropdown menu 
+
+  // Se crea el contenido HTML del menú desplegable 
   document.getElementById('dropmenu').innerHTML = `<div class="dropdown">
                                                  <button class="btn btn-secondary dropdown-toggle nav-link" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="emailMenu">
                                                  <img class="userIcon" src="icons/user-regular.svg" alt="Usuario"></i>${userName.email}
@@ -70,9 +75,9 @@ document.addEventListener("DOMContentLoaded", function () {
                                                     <span class="slider round"></span>
                                                 </label></div></li>
                                                    </ul>
-                                                
                                                 </div>`;
 
+  // Evento para cerrar sesión
   document.getElementById('logout').addEventListener('click', () => {
     let swalScript = document.createElement('script');
     swalScript.src = 'https://cdn.jsdelivr.net/npm/sweetalert2@11';
@@ -90,6 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
         cancelButtonText: 'Cancelar'
       }).then((result) => {
         if (result.isConfirmed) {
+        // En caso de confirmar el cierre de sesión se borran los datos de local/session storage y redirige al login
           localStorage.removeItem('usuario') || sessionStorage.removeItem('usuario');
           location.href = 'login.html';
         }
@@ -97,27 +103,30 @@ document.addEventListener("DOMContentLoaded", function () {
     };
   });
 
+  // Configuración del interruptor de modo oscuro
   const colorSwitch = document.querySelector('#switch input[type="checkbox"]');
   function cambiaTema(ev){
       if(ev.target.checked){
           document.documentElement.setAttribute('tema', 'dark');
-      // Guardar la preferencia en localStorage cuando se active el modo oscuro
+          // Guarda la preferencia en localStorage cuando se active el modo oscuro
           localStorage.setItem('modoNoche', 'true');
       } else {
           document.documentElement.setAttribute('tema', 'light');
-          // Guardar la preferencia en localStorage cuando se desactive el modo oscuro
+          // Guarda la preferencia en localStorage cuando se desactive el modo oscuro
           localStorage.setItem('modoNoche', 'false');
       }
   }
-  // Verificar la preferencia almacenada en localStorage
-const modoNocheGuardado = localStorage.getItem('modoNoche');
 
-// Aplicar el modo nocturno si está activo
-if (modoNocheGuardado === 'true') {
+  // Verifica la preferencia almacenada en localStorage
+  const modoNocheGuardado = localStorage.getItem('modoNoche');
+
+  // Aplica el modo oscuro si está activo
+  if (modoNocheGuardado === 'true') {
     document.documentElement.setAttribute('tema', 'dark');
-    // Asegurar de que el interruptor esté marcado
+    // Asegura que el interruptor esté marcado
     colorSwitch.checked = true;
-}
+  }
 
-colorSwitch.addEventListener('change', cambiaTema);
+  // Evento para cambiar el tema al activar/desactivar el interruptor
+  colorSwitch.addEventListener('change', cambiaTema);
 });

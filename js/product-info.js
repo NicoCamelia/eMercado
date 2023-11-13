@@ -1,13 +1,20 @@
-let prodID = JSON.parse(localStorage.getItem("prodID")); // Obteniendo prodID de localStorage
-let prodCAT = JSON.parse(localStorage.getItem("catID")); // Obteniendo catID de localStorage
-let urlPRODUCTS = PRODUCTS_URL + prodCAT + EXT_TYPE; // Generando URL concatenando variables desde init.js y catID desde localStorage
-let urlPROD = PRODUCT_INFO_URL+ + prodID + EXT_TYPE; // Generando URL concatenando variables desde init.js y prodID desde localStorage
-let urlCOMENTS = PRODUCT_INFO_COMMENTS_URL + prodID + EXT_TYPE; // Generando Url concatenando variables para traer los comentarios independientemente por cada id.
-let currentProd; //Se declara la variable que almacena la información del producto mostrado actualmente en la página
-let relatedProducts; //Se declara la variable que almacena la ifnformación de los productos relacionados
-
+// Obteniendo prodID de localStorage
+let prodID = JSON.parse(localStorage.getItem("prodID"));
+// Obteniendo catID de localStorage
+let prodCAT = JSON.parse(localStorage.getItem("catID"));
+// Generando URL concatenando variables desde init.js y catID desde localStorage
+let urlPRODUCTS = PRODUCTS_URL + prodCAT + EXT_TYPE;
+// Generando URL concatenando variables desde init.js y prodID desde localStorage
+let urlPROD = PRODUCT_INFO_URL + +prodID + EXT_TYPE;
+// Generando Url concatenando variables para traer los comentarios independientemente por cada id.
+let urlCOMENTS = PRODUCT_INFO_COMMENTS_URL + prodID + EXT_TYPE;
+// Se declara la variable que almacena la información del producto mostrado actualmente en la página
+let currentProd;
+// Se declara la variable que almacena la información de los productos relacionados
+let relatedProducts;
 
 document.addEventListener("DOMContentLoaded", function (e) {
+    // Obtener la información del producto actual al cargar la página
     getJSONData(urlPROD).then(function (resultObj) {
         if (resultObj.status === "ok") {
             currentProd = resultObj.data;
@@ -19,6 +26,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
     });
 });
 
+// Obtener productos relacionados
 function getRelatedProducts() {
     getJSONData(urlPRODUCTS).then(function (resultObj) {
         if (resultObj.status === "ok") {
@@ -28,14 +36,17 @@ function getRelatedProducts() {
                
                 let products = categoryData.products; // Obtenemos solo los productos de la misma categoría
 
-                relatedProducts = products.filter(product => product.id !== currentProd.id); // Evita que se muestre el producto actual entre los relacionados
-
+                // Evita que se muestre el producto actual entre los relacionados
+                relatedProducts = products.filter(product => product.id !== currentProd.id); 
+                
+                
                 showRelatedProducts(relatedProducts); // Muestra las cards de productos relacionados
             }
         }
     });
 }
 
+// Muestra las tarjetas de productos relacionados
 function showRelatedProducts(relatedProducts) {
     let htmlRelatedProducts = '<h4 class="py-2">Productos Relacionados</h4><div class="row">';
 
@@ -66,31 +77,37 @@ function showRelatedProducts(relatedProducts) {
 
     document.getElementById("related-products").innerHTML = htmlRelatedProducts;
 
- 
-    let productCards = document.querySelectorAll('#related-products .card'); // Agrega un evento de clic a las tarjetas de productos relacionados
+    // Agrega un evento de clic a las tarjetas de productos relacionados
+    let productCards = document.querySelectorAll('#related-products .card'); 
 
     productCards.forEach(card => {
         card.addEventListener('click', function () {
-
-            let selectedProductID = parseInt(card.getAttribute('data-product-id')); // Obtiene el ID del producto relacionado seleccionado
             
-            redirectToProduct(selectedProductID); // Redirige al usuario a la página del producto relacionado
+            // Obtiene el ID del producto relacionado seleccionado
+            let selectedProductID = parseInt(card.getAttribute('data-product-id')); 
+            
+            // Redirige al usuario a la página del producto relacionado
+            redirectToProduct(selectedProductID); 
         });
     });
 }
 
 function redirectToProduct(productID) {
     
-    localStorage.setItem("prodID", productID); // Almacena el ID del producto seleccionado en localStorage
+    // Almacena el ID del producto seleccionado en localStorage
     
-    window.location.href = "product-info.html"; // Redirige al usuario a la página de detalles del producto
+    localStorage.setItem("prodID", productID);
+    
+    // Redirige al usuario a la página de detalles del producto
+    window.location.href = "product-info.html"; 
 }
 
 
-
+// Muestra la información del producto actual en el HTML
 function showProductInfo() {
     let htmlContentToAppend = "";
-  
+    
+    // Construye el HTML para mostrar la información del producto
     htmlContentToAppend += `
       <div><h4>${currentProd.name}</h4></div>
       <div class="input-group mb-3 align-items-center">
@@ -141,8 +158,8 @@ function showProductInfo() {
     });
   }
   
-
-function showImagesHtml() {
+    // Muestra el carrusel de imágenes del producto actual
+    function showImagesHtml() {
     let htmlImages = `
     <div id="ProductCarousel" class="carousel carousel-dark slide img-thumbnail" data-bs-ride="carousel">
         <div class="carousel-indicators">
@@ -191,34 +208,38 @@ function showImagesHtml() {
 };
 
 
+     // Muestra los comentarios del producto actual
+    function showComments() {
 
-function showComments() {
-
-    getJSONData(urlCOMENTS).then(function (resultObj) { // Realiza una solicitud GET a la URL de los comentarios
+    // Realiza una solicitud GET a la URL de los comentarios
+    getJSONData(urlCOMENTS).then(function (resultObj) { 
         if (resultObj.status === "ok") {
             let comments = resultObj.data;
 
-         
-            let htmlContentToAppend = '<h4>Comentarios</h4>'; // Construye el HTML para mostrar los comentarios
+            // Construye el HTML para mostrar los comentarios
+            let htmlContentToAppend = '<h4>Comentarios</h4>'; 
 
             for (let i = 0; i < comments.length; i++) {
                 let comment = comments[i];
 
-              
-                let checkedStars = Math.floor(comment.score); // Calcula la cantidad de estrellas llenas y vacías según el puntaje
+                // Calcula la cantidad de estrellas llenas y vacías según el puntaje
+                let checkedStars = Math.floor(comment.score); 
                 let emptyStars = 5 - checkedStars;
 
-                let starContenedor = '<div class="stars-container">'; // Crea un contenedor para las estrellas
+                // Crea un contenedor para las estrellas
+                let starContenedor = '<div class="stars-container">'; 
 
-                for (let i = 0; i < checkedStars; i++) { // Agrega las estrellas llenas
+                // Agrega las estrellas llenas 
+                for (let i = 0; i < checkedStars; i++) { 
                     starContenedor += '<span class="fa fa-star checked"></span>';
                 }
-
-                for (let i = 0; i < emptyStars; i++) { // Agrega las estrellas vacías
+                // Agrega las estrellas vacías
+                for (let i = 0; i < emptyStars; i++) { 
                     starContenedor += '<span class="fa fa-star"></span>';
                 }
-      
-                starContenedor += '</div>'; // Cierra el contenedor de estrellas
+
+                // Cierra el contenedor de estrellas
+                starContenedor += '</div>'; 
 
                 htmlContentToAppend += `
                     <div class="card mb-3">
@@ -231,16 +252,18 @@ function showComments() {
                     </div>
                 `;
             }
-
-            document.getElementById("comments-section").innerHTML = htmlContentToAppend; // Agrega los comentarios al elemento con id "comments-section"
+            
+            // Agrega los comentarios al elemento con id "comments-section"
+            document.getElementById("comments-section").innerHTML = htmlContentToAppend; 
         }
     });
 }
 
+// Se le da funcionalidad al boton para sumar el comentario
+document.getElementById('btn-comment').addEventListener('click', function () { 
 
-document.getElementById('btn-comment').addEventListener('click', function () { // Se le da funcionalidad al boton para sumar el comentario
-
-let htmlContentToAppend = '' // Construye el HTML para mostrar los comentarios
+    // Construye el HTML para mostrar los comentarios
+let htmlContentToAppend = '' 
 
 // Se toman los valores necesarios para la construccion del comentario 
 let newUser = JSON.parse(localStorage.getItem('usuario') || sessionStorage.getItem('usuario'))
@@ -267,6 +290,8 @@ let valorEstrella = document.getElementById("stars").value
     document.getElementById('stars').value = "1"
 });
 
+
+// Función para generar las estrellas en un comentario
 function estrellas(score) {
     let estrella = ``
     for (let i = 0; i < 5; i++) {

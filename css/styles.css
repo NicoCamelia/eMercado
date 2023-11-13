@@ -24,8 +24,8 @@ nav a {
 
 
 footer {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 footer p {
@@ -151,11 +151,7 @@ a.custom-card:hover {
   text-align: center;
 }
 
-#boton {
-  background-color: #212529;
-  border: black;
-  color: #83807b;
-}
+
 
 .divcentrar {
   align-items: center;
@@ -365,7 +361,7 @@ tr {
   color: var(--color-fuente)
 }
 
-/*Quita las flechas de lo input type number*/
+/*Quita las flechas de los input type number*/
 .no-arrow-input[type="number"]::-webkit-inner-spin-button,
 .no-arrow-input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;

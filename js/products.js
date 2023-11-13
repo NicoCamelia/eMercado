@@ -1,6 +1,10 @@
+// Arreglo que almacenará la información de los productos actuales
 let currentProductsArray = [];
-let catID = JSON.parse(localStorage.getItem("catID")); // Obteniendo catID de localStorage
-let urlCAT = PRODUCTS_URL + catID + EXT_TYPE; // Generando URL concatenando variables desde init.js y catID desde localStorage
+// Obteniendo catID de localStorage
+let catID = JSON.parse(localStorage.getItem("catID")); 
+// Generando URL concatenando variables desde init.js y catID desde localStorage
+let urlCAT = PRODUCTS_URL + catID + EXT_TYPE; 
+// Variables para filtrar por rango de precio
 let minCount = undefined;
 let maxCount = undefined;
 
@@ -19,13 +23,13 @@ document.addEventListener("DOMContentLoaded", function (e) {
     });
 });
 
-
+// Establece el ID del producto seleccionado en el localStorage y redirige a la página de detalles del producto
 function setProductID(id) {
     localStorage.setItem("prodID", id);
     window.location = "product-info.html"
 }
 
-// Nombre de categoria variabe en subtitulo en negrita
+// Establece el nombre de la categoría y lo muestra en negrita en el subtitulo
 function setCategoryName(newCategoryName) {
     var categoryName = document.getElementById("category-name");
     categoryName.innerHTML = newCategoryName;
@@ -33,15 +37,18 @@ function setCategoryName(newCategoryName) {
 
 }
 
+// Muestra la lista de productos con filtrado opcional por rango de precio
 function showProductsList() {
     let htmlContentToAppend = "";
 
     for (let i = 0; i < currentProductsArray.length; i++) {
         let product = currentProductsArray[i];
 
+        // Filtra por rango de precio si se han definido minCount y maxCount
         if (((minCount == undefined) || (minCount != undefined && parseInt(product.cost) >= minCount)) &&
             ((maxCount == undefined) || (maxCount != undefined && parseInt(product.cost) <= maxCount))){
-
+        
+        // Construye el HTML para mostrar la lista de productos
         htmlContentToAppend += `
         <div onclick="setProductID(${product.id})" class="list-group-item list-group-item-action cursor-active">
             <div class="row">
@@ -63,7 +70,9 @@ function showProductsList() {
     }
 }
 
+// Event listeners para los botones de ordenamiento y filtrado
 document.getElementById("MayorAMenor").addEventListener('click', () => {
+    // Ordena los productos de mayor a menor precio y actualiza la lista
     result = currentProductsArray.sort(function(a, b) {
         if ( a.cost < b.cost ){ return -1; }
         if ( a.cost > b.cost ){ return 1; }
@@ -74,6 +83,7 @@ document.getElementById("MayorAMenor").addEventListener('click', () => {
 });
 
 document.getElementById("MenorAMayor").addEventListener('click', () => {
+    // Ordena los productos de menor a mayor precio y actualiza la lista
     result = currentProductsArray.sort(function(a, b) {
         if ( a.cost > b.cost ){ return -1; }
         if ( a.cost < b.cost ){ return 1; }
@@ -84,6 +94,7 @@ document.getElementById("MenorAMayor").addEventListener('click', () => {
 });
 
 document.getElementById("porCantidad").addEventListener('click', () => {
+    // Ordena los productos por cantidad vendida de mayor a menor y actualiza la lista
     result = currentProductsArray.sort(function(a, b) {
         let aCount = parseInt(a.soldCount);
         let bCount = parseInt(b.soldCount);
@@ -97,6 +108,7 @@ document.getElementById("porCantidad").addEventListener('click', () => {
 });
 
 document.getElementById("filtroRango").addEventListener('click', () => {
+    // Aplica el filtro por rango de precio y actualiza la lista
     minCount = document.getElementById("filtroRangoMin").value;
     maxCount = document.getElementById("filtroRangoMax").value;
 
@@ -118,6 +130,7 @@ document.getElementById("filtroRango").addEventListener('click', () => {
 });
 
 document.getElementById("limpiarFiltroRango").addEventListener('click', () => {
+    // Limpia los campos de filtro por rango de precio y actualiza la lista
     document.getElementById("filtroRangoMin").value = "";
     document.getElementById("filtroRangoMax").value = "";
 
@@ -127,6 +140,7 @@ document.getElementById("limpiarFiltroRango").addEventListener('click', () => {
     showProductsList()
 });
 
+// Event listener para la barra de búsqueda
 document.addEventListener('DOMContentLoaded', function() {
 
     const search_Input = document.getElementById('searchInput');

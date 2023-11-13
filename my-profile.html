@@ -24,37 +24,108 @@
         font-size: 3.5rem;
       }
     }
+    footer{
+      position:fixed;
+      width: 100%;
+      bottom:0;
+    }
+
+    .image-container {
+      position: fixed;
+      top: 0;
+      right: 0;
+      padding: 15px;
+      text-align: center;
+    }
+
+    #profileimage-preview {
+      max-width: 100px;
+      max-height: 100px;
+    }
   </style>
 </head>
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav w-100 justify-content-between">
-          <li >
-            <a class="nav-item" href="index.html"><img class="logo" src="icons\logo(190x45px).svg"></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="categories.html">Categorías</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="sell.html">Vender</a>
-          </li>
-          <li class="nav-item" id="dropmenu">
-          </li>
-        </ul>
+    <div class="col-12">
+      <div class="row">
+        <div class="col-8 col-lg-2">
+          <a class="logoItem" href="index.html"><img class="logo" src="icons\logo(190x45px).svg"></a>
+        </div>
+        <div class="col-2 col-lg-10">
+          <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav w-100 justify-content-between align-items-center">
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html">Inicio</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="categories.html">Categorías</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="sell.html">Vender</a>
+                </li>
+                <li class="nav-item" id="dropmenu"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </nav>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-md-6">
+      <h2 class="mt-4 mb-5">Perfil</h2>
       </div>
+      <div class="col-md-6 text-right">
+      <img id="profileimage-preview" src="img/img_perfil.png" class="rounded" alt="Imagen de perfil" >
+    </div>
+    </div>
+      <div class="border-top border-bottom p-1 pb-5" style="height: 44vh;">
+        <div class="row mt-3">
+          <div class="col-6">
+            <label for="profilename1" class="form-group p-1">Primer Nombre*</label>
+            <input type="text" name="" id="profilename1" class="form-control">
+          </div>
+          <div class="col-6">
+            <label for="profilename2" class="form-group p-1">Segundo Nombre</label>
+
+            <input type="text" name="" id="profilename2" class="form-control">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <label for="profilesurname1" class="form-group p-1">Primer Apellido*</label>
+            <input type="text" name="" id="profilesurname1" class="form-control">
+          </div>
+          <div class="col-6">
+            <label for="profilesurname2" class="form-group p-1">Segundo Apellido</label>
+            <input type="text" name="" id="profilesurname2" class="form-control">
+          </div>
+        </div>
+        <div class="row mb-5">
+          <div class="col-6">
+            <label for="profilemail" class="form-group p-1">E-mail*</label>
+            <input type="text" name="" id="profilemail" class="form-control">
+          </div>
+          <div class="col-6">
+            <label for="profileimage" class="form-group p-1">Imagen de perfil</label>
+            <input type="file" name="" id="profileimage" class="form-control" accept="image/">
+          </div>
+          <div class="col-6">
+            <label for="profiletel" class="form-group p-1 d-none d-md-block">Telefono de contacto</label>
+            <label for="profiletel" class="form-group p-1 d-md-none d-sm-block">Telefono*</label>
+            <input type="text" name="" id="profiletel" class="form-control">
+          </div>
+        </div>
+      </div>
+      <button id="guardarDatos" class="btn btn-primary mt-3" type="button">Guardar cambios</button>
     </div>
   </main>
   <footer class="text-muted">
