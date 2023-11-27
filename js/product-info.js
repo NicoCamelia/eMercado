@@ -111,14 +111,16 @@ function showProductInfo() {
     htmlContentToAppend += `
       <div><h4>${currentProd.name}</h4></div>
       <div class="input-group mb-3 align-items-center">
-        <div class="price-fontstyle">${currentProd.currency}&nbsp;${currentProd.cost}</div>
-        <span class="text-muted font-small pl-5">&nbsp;&nbsp;&nbsp;| +${currentProd.soldCount} vendidos</span>
+        <div class="price-fontstyle"><i class="bi bi-cash-stack"></i>&nbsp;${currentProd.currency}&nbsp;${currentProd.cost}</div>
+        <span class="text-muted font-small pl-5">&nbsp;&nbsp;&nbsp;<i class="bi bi-award"></i> +${currentProd.soldCount} vendidos</span>
       </div>
       <div class="fs-6 pt-1 pb-3">
-        <h6><strong>Descripción</strong></h6>${currentProd.description}
+        <h6><strong>Descripción</strong></h6><i class="bi bi-info-circle-fill"></i>&nbsp;${currentProd.description}
       </div>
       <div class="col-12">
-        <input type="button" value="Agregar Carrito" id="agregar-carrito" class="btn btn-outline-dark btn-sm">
+      <button type="button" id="agregar-carrito" class="btn btn-outline-dark btn-sm">
+      Agregar Carrito&nbsp;<i class="bi bi-bag-plus-fill"></i>
+      </button>
       </div>
     `;
   
@@ -246,7 +248,7 @@ function showProductInfo() {
                         <div class="card-body">
                             <h6 class="card-title">${comment.user}</h6>
                             ${starContenedor}
-                            <small class="text-muted">${comment.dateTime}</small>
+                            <small class="text-muted"><i class="bi bi-clock"></i>&nbsp;${comment.dateTime}</small>
                             <p class="card-text">${comment.description}</p>
                         </div>
                     </div>
@@ -279,7 +281,7 @@ let valorEstrella = document.getElementById("stars").value
             <div class="d-flex flex-row">
                             ${estrellas(valorEstrella)}
                         </div>
-            <small class="text-muted">${newDateTime}</small>
+            <small class="text-muted"><i class="bi bi-clock"></i>${newDateTime}</small>
             <p class="card-text">${newDescription}</p>
         </div>
     </div>

@@ -367,7 +367,7 @@ tr {
     -webkit-appearance: none;
     margin: 0;
 }
+
 .modal-content {
   background-color: var(--color-fondo); /* Cambia el color a tu elección */
 }
-

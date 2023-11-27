@@ -8,6 +8,9 @@
   <link rel="shortcut icon" href="icons\singleIcon.png">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
   <link rel="stylesheet" href="sweetalert2.min.css">
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
@@ -29,13 +32,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav w-100 justify-content-between align-items-center">
                 <li class="nav-item">
-                  <a class="nav-link" href="index.html">Inicio</a>
+                  <a class="nav-link" href="index.html"><i class="bi bi-house-door"></i>&nbsp;Inicio</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="categories.html">Categorías</a>
+                  <a class="nav-link" href="categories.html"><i class="bi bi-bookmark"></i></i>&nbsp;Categorías</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="sell.html">Vender</a>
+                  <a class="nav-link" href="sell.html"><i class="bi bi-cash-coin">&nbsp;</i>Vender</a>
                 </li>
                 <li class="nav-item" id="dropmenu"></li>
               </ul>
@@ -46,15 +49,16 @@
     </div>
   </nav>
   <main>
+    <!--Carrito-->
     <div class="container">
       <main class="pb-5">
         <div class="text-center p-4">
-          <h2>Carrito de compras</h2>
+          <h2><i class="bi bi-cart4"></i>&nbsp;Carrito de compras</h2>
         </div>
         <div class="container">
 
           <div class="col text-start">
-            <p class="lead">Articulos a comprar</p>
+            <p class="lead"><i class="bi bi-box-seam"></i>&nbsp;Articulos a comprar</p>
           </div>
           <table class="table border-bottom" id="cart-table">
             <tr style="border-bottom: black;">
@@ -68,13 +72,13 @@
             </tbody>
           </table>
         </div>
-        
+      <!--Opciones de envío-->
         <div class="container">
           <div class="row">
               <div class="col-md-6">
         <form id="checkoutForm">    
         <div class="text-start">
-          <p class="lead">Tipo de Envío:</p>
+          <p class="lead"><i class="bi bi-truck"></i>&nbsp;Tipo de Envío:</p>
           <div class="form-check">
             <input class="form-check-input" type="radio" name="tipoEnvio" id="premiumEnvio" value="15" required>
             <label class="form-check-label" for="premiumEnvio">
@@ -96,7 +100,7 @@
         </div>
 
         <div class="text-start mt-3">
-          <p class="lead">Dirección de Envío:</p>
+          <p class="lead"><i class="bi bi-geo-alt"></i></i>&nbsp;Dirección de Envío:</p>
           <div class="mb-3">
             <label for="calle" class="form-label">Calle:</label>
             <input type="text" class="form-control" id="calle" placeholder="Ingresa la calle" required>
@@ -120,10 +124,10 @@
           </div>
         </div>
       </div>
-
+    <!--Costos del producto-->
         <div class="col-md-6">
         <div class="container">
-          <p class="lead">Costos</p>
+          <p class="lead"><i class="bi bi-tags"></i>&nbsp;Costos</p>
           <div class="form-control">
             <div class="row">
               <div class="col-8 text-muted">
@@ -154,18 +158,20 @@
             </div>
           </div>
         </div>
-
+    <!--Forma de pago-->
         <div class="container">
-          <p class="lead mt-3">Forma de pago</p>
+          <p class="lead mt-3"><i class="bi bi-wallet2"></i>&nbsp;Forma de pago</p>
           <div class="row">
               <div class="col-12 col-md-5">
                   <p id="selectedPaymentText">No ha seleccionado</p>
               </div>
               <div class="col-12 col-md-5">
-                <a data-toggle="modal" data-target="#paymentModal" style="color: blue; text-decoration: underline;">Seleccionar</a>
+                <button type="button" class="m-1 btn btn-dark" data-toggle="modal" data-target="#paymentModal">Seleccionar</button>
               </div>
           </div>
-          <button id="btnFinalizarCompra" class="col-12 btn btn-primary">Finalizar Compra</button>  
+          <button id="btnFinalizarCompra" class="col-12 btn btn-success">
+            Finalizar Compra&nbsp;<i class="bi bi-cart-check-fill"></i>
+          </button>  
       </div>
     </form>
   </div>
@@ -177,13 +183,13 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title">Forma de Pago</h4>
+            <h4 class="modal-title"><i class="bi bi-wallet-fill"></i>&nbsp;Forma de Pago</h4>
           </div>
           <div class="modal-body">
             <form id="paymentForm">
               <div class="form-check">
                 <input class="form-check-input" type="radio" id="creditCardRadio" name="paymentOption" value="creditCard">
-                <label class="form-check-label" for="creditCardRadio">Tarjeta de Crédito</label>
+                <label class="form-check-label" for="creditCardRadio">Tarjeta de Crédito o Débito&nbsp;<i class="bi bi-credit-card"></i></label>
               </div>
               <hr>
               <div id="creditCardFields" class="form-group">
@@ -191,7 +197,7 @@
                   <div class="row">
                     <div class="col-md-7">
                       <label for="creditCardNumber">Número de Tarjeta:</label>
-                      <input type="number" inputmode="numeric" id="creditCardNumber" class="form-control py-2 payment-field no-arrow-input" required pattern="\d{16}">
+                      <input type="number" inputmode="numeric" id="creditCardNumber" class="form-control py-2 payment-field no-arrow-input" maxlength="19" required>
                     </div>
                     <div class="col-md-4">
                       <label for="securityCode">Código de Seg.:</label>
@@ -206,7 +212,7 @@
               </div>
               <div class="form-check pt-4">
                 <input class="form-check-input" type="radio" id="bankTransferRadio" name="paymentOption" value="bankTransfer">
-                <label class="form-check-label" for="bankTransferRadio">Transferencia Bancaria</label>
+                <label class="form-check-label" for="bankTransferRadio">Transferencia Bancaria&nbsp;<i class="bi bi-bank2"></i></label>
               </div>
               <hr>
               <div id="bankTransferFields" class="form-group">
@@ -223,7 +229,7 @@
           </div>
           <div class="modal-footer" class="form-group">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-primary" id="saveButton">Guardar</button>
+            <button type="button" class="btn btn btn-success" id="saveButton">Guardar</button>
           </div>
         </div>
       </div>

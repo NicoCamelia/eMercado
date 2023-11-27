@@ -64,8 +64,7 @@ function displayCart(cartData) {
         <td id="nombre">${product.name}</td>
         <td id="precio">${currencySymbol + ' '}<span class="precio">${unitCost}</span></td>
         <td><input type="number" class="form-control cantidad" style="width: 10vh;" min="1" value="${product.count}" onchange="recalcular();"></td>
-        <td><b>${currencySymbol + ' '}<span class="subtotal">${subtotal}</span></b></td>
-        <td>
+        <td><b>${currencySymbol + ' '}<span class="subtotal">${subtotal}</span></b>&nbsp;&nbsp;&nbsp;
           <a href="#" class="eliminar-articulo" data-product-id="${product.id}">
             <i class="fas fa-trash-alt text-danger"></i>
           </a>
@@ -261,7 +260,7 @@ function disablePaymentFields(fieldGroup) {
   });
 }
 
-  // Obtén el elemento de entrada
+  // Se obtiene el elemento de entrada
   const expirationDateInput = document.getElementById("expirationDate");
 
   // Agrega un event listener para el evento "input"
@@ -269,7 +268,7 @@ function disablePaymentFields(fieldGroup) {
     // Elimina cualquier carácter que no sea un dígito
     this.value = this.value.replace(/\D/g, "");
 
-    // Asegúrate de que no haya más de 4 caracteres
+    // Asegura de que no haya más de 4 caracteres
     if (this.value.length > 4) {
       this.value = this.value.slice(0, 4);
     }
@@ -280,19 +279,22 @@ function disablePaymentFields(fieldGroup) {
     }
   });
 
-  // Agrega un event listener para el evento "change"
-  expirationDateInput.addEventListener("change", function() {
-    // Verifica si el campo tiene exactamente 4 caracteres
-    if (this.value.length !== 5) {
-      Swal.fire(
-        'Error',
-        'El campo debe tener 4 caracteres (MM/AA).',
-        'error'
-    );
-      this.value = "";
-    }
-  });
+const creditCardNumberInput = document.getElementById('creditCardNumber');
 
+creditCardNumberInput.addEventListener("input", function() {
+  // Elimina cualquier carácter que no sea un dígito
+  this.value = this.value.replace(/\D/g, "");
+
+  // Asegura de que no haya más de 4 caracteres
+  if (this.value.length > 19) {
+    this.value = this.value.slice(0, 19);
+  }
+
+  // Agrega la barra "/" después de los primeros 2 caracteres del mes
+  if (this.value.length >= 4) {
+    this.value = this.value.slice(0, 4) + "-" + this.value.slice(4);
+  }
+});
 
 
 setInterval(precioFinal, 100);
