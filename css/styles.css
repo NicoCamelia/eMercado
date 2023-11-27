@@ -185,9 +185,9 @@ a.custom-card:hover {
 }
 
 [tema="dark"]{
-    --color-fuente: white;
+    --color-fuente: #ffffffe5;
     --color-fondo: rgb(41, 41, 41);
-    --color-navbar: #ffffff;
+    --color-navbar: #ffffffe5;
     --color-hover: #212529;
 }
 

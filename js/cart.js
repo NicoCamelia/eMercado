@@ -279,22 +279,39 @@ function disablePaymentFields(fieldGroup) {
     }
   });
 
-const creditCardNumberInput = document.getElementById('creditCardNumber');
+  const creditCardNumberInput = document.getElementById("creditCardNumber");
 
-creditCardNumberInput.addEventListener("input", function() {
+  creditCardNumberInput.addEventListener("input", function() {
+    // Elimina cualquier carácter que no sea un dígito
+    this.value = this.value.replace(/\D/g, "");
+  
+    // Agrega guiones después de cada grupo de 4 dígitos
+    if (this.value.length > 4) {
+      this.value = this.value.slice(0, 4) + "-" + this.value.slice(4, 8) + "-" + this.value.slice(8, 12) + "-" + this.value.slice(12, 16);
+    }
+  
+    // Limita la longitud a 19 caracteres (16 dígitos + 3 guiones)
+    if (this.value.length > 19) {
+      this.value = this.value.slice(0, 19);
+    }
+  });
+  
+
+const securityCodeInput = document.getElementById("securityCode");
+
+securityCodeInput.addEventListener("input", function() {
   // Elimina cualquier carácter que no sea un dígito
   this.value = this.value.replace(/\D/g, "");
 
-  // Asegura de que no haya más de 4 caracteres
-  if (this.value.length > 19) {
-    this.value = this.value.slice(0, 19);
-  }
-
-  // Agrega la barra "/" después de los primeros 2 caracteres del mes
-  if (this.value.length >= 4) {
-    this.value = this.value.slice(0, 4) + "-" + this.value.slice(4);
+  // Limita la longitud a 3 caracteres
+  if (this.value.length > 3) {
+    this.value = this.value.slice(0, 3);
   }
 });
+
+  
+  
+  
 
 
 setInterval(precioFinal, 100);

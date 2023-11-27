@@ -4,7 +4,27 @@ const userPass = document.getElementById('login-password');
 let registerBtn = document.getElementById('RegisterBtn');
 let loginBtn = document.getElementById('loginBtn');
 
-// Evento para el botón de registro
+
+    // Formato Input Correo Electrónico
+    document.addEventListener('DOMContentLoaded', function() {
+    // Obtener el campo de correo electrónico del formulario de registro
+    const emailRegisterInput = document.getElementById('register-mail');
+
+    // Agregar un listener para validar el correo electrónico en el formulario de registro
+    emailRegisterInput.addEventListener('input', function(event) {
+        const input = event.target;
+        const regex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,4}$/;
+
+        if (!regex.test(input.value)) {
+            input.classList.remove('is-valid');
+            input.classList.add('is-invalid');
+        } else {
+            input.classList.remove('is-invalid');
+            input.classList.add('is-valid');
+        }
+    });
+});
+
 registerBtn.addEventListener('click', () => {
 
     let usuario = {};
@@ -15,6 +35,17 @@ registerBtn.addEventListener('click', () => {
     usuario.pass = document.getElementById('register-password').value;
 
     let checkbox = document.getElementById('checkbox'); // Se obtiene checkbox "Recordar usuario"
+    const emailInput = document.getElementById('register-mail');
+
+    // Verifica si el correo electrónico tiene el formato válido antes de continuar
+    if (!emailInput.classList.contains('is-valid')) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Por favor, ingrese un correo electrónico válido.',
+        });
+        return; // Evita el registro si el correo electrónico no es válido
+    }
 
     // Verifica si todos los campos requeridos están llenos
     if (usuario.email !== '' && usuario.pass !== '' && usuario.profilename !== '') {
@@ -64,6 +95,7 @@ document.getElementById('form-login').addEventListener('submit', (e) => {
 
         // Verifica si el nombre de usuario y la contraseña ingresados coinciden con la información de usuario almacenada en el JSON
         if (parsedUser.email == username && parsedUser.pass == password) {
+            validateEmail()
             // Se muestra un mensaje de éxito para el inicio de sesión exitoso
             Swal.fire({
                 icon: 'success',

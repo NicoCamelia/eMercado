@@ -156,10 +156,11 @@
               <div id="login" style="display:none;">
                 <h3><b>Iniciar Sesión</b></h3>
                 <form action="" class="form-input" id="form-login">
-                <div class="form-group py-2 w-75">
-                  <input type="text" name="email" id="login-mail" class="form-control w-75 centrar" placeholder="" required>
-                  <label class="placeholder-label">E-Mail*</label>
-                  </div>
+                  <div class="form-group py-2 w-75">
+                    <label for="login-mail" class="form-label">E-Mail*</label>
+                    <input type="text" name="email" id="login-mail" class="form-control w-75 centrar is-invalid" placeholder="" required>
+                    <div class="invalid-feedback">Por favor, ingrese un correo electrónico válido.</div>
+                </div>
                   <div class="form-group py-2 w-75"><input type="password" name="password" id="login-password" class="form-control w-75 centrar" placeholder="" required>
                     <label class="placeholder-label ">Contraseña*</label>
                   </div>
